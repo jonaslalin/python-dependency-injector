@@ -1,4 +1,4 @@
-VERSION := $(shell python setup.py --version)
+VERSION := $(shell python3 setup.py --version)
 
 CYTHON_SRC := $(shell find src/dependency_injector -name '*.pyx')
 
@@ -27,23 +27,23 @@ clean:
 
 cythonize:
 	# Compile Cython to C
-	cython -a $(CYTHON_DIRECTIVES) $(CYTHON_SRC)
+	cython --gdb -a $(CYTHON_DIRECTIVES) $(CYTHON_SRC)
 	# Move all Cython html reports
 	mkdir -p reports/cython/
 	find src -name '*.html' -exec mv {}  reports/cython/  \;
 
 build: clean cythonize
 	# Compile C extensions
-	python setup.py build_ext --inplace
+	python3 setup.py build_ext --inplace
 
 docs-live:
 	sphinx-autobuild docs docs/_build/html
 
 install: uninstall clean cythonize
-	pip install -ve .
+	pip3 install -ve .
 
 uninstall:
-	- pip uninstall -y -q dependency-injector 2> /dev/null
+	- pip3 uninstall -y -q dependency-injector 2> /dev/null
 
 test:
 	# Unit tests with coverage report
@@ -63,7 +63,7 @@ check:
 
 test-publish: cythonize
 	# Create distributions
-	python setup.py sdist
+	python3 setup.py sdist
 	# Upload distributions to PyPI
 	twine upload --repository testpypi dist/dependency-injector-$(VERSION)*
 

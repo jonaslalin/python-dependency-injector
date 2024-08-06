@@ -7,7 +7,8 @@
     "type=bind,source=.devcontainer/.bash_history,target=/root/.bash_history"
   ],
   "containerEnv": {
-    "PROMPT_COMMAND": "history -a"
+    "PROMPT_COMMAND": "history -a",
+    "DEPENDENCY_INJECTOR_DEBUG_MODE": "1"
   },
   "runArgs": ["--security-opt", "label=disable"],
   "postStartCommand": "pip3 install Cython==0.29.32"
