@@ -1,0 +1,14 @@
+{
+  "image": "docker.io/jonaslalin/cpython-debugging:latest",
+  "mounts": [
+    "type=bind,source=.devcontainer/ca-certificates.crt,target=/etc/ssl/certs/ca-certificates.crt,readonly",
+    "type=bind,source=.devcontainer/pip.conf,target=/root/.config/pip/pip.conf,readonly",
+    "type=bind,source=.devcontainer/.netrc,target=/root/.netrc,readonly",
+    "type=bind,source=.devcontainer/.bash_history,target=/root/.bash_history"
+  ],
+  "containerEnv": {
+    "PROMPT_COMMAND": "history -a"
+  },
+  "runArgs": ["--security-opt", "label=disable"],
+  "postStartCommand": "pip3 install Cython==0.29.32"
+}
