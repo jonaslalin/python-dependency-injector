@@ -10,6 +10,9 @@
     "PROMPT_COMMAND": "history -a",
     "DEPENDENCY_INJECTOR_DEBUG_MODE": "1"
   },
-  "runArgs": ["--security-opt", "label=disable"],
+  "runArgs": [
+    "--security-opt", //
+    "label=disable"
+  ],
   "postStartCommand": "pip3 install Cython==0.29.32"
 }
